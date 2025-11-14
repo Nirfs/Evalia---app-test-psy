@@ -5,6 +5,7 @@ import Dashboard from '../pages/Dashboard'
 import NotFound from '../pages/NotFound'
 import Test from '../pages/Test'
 import TestList from '../pages/TestList'
+import Register from '../pages/Register'
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Login />,
+      },
+      {
+        path: '/register',
+        element: <Register />,
       },
       {
         path: 'dashboard',
