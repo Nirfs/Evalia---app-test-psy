@@ -3,9 +3,10 @@ import Layout from '../pages/Layout'
 import Login from '../pages/Login'
 import Dashboard from '../pages/Dashboard'
 import NotFound from '../pages/NotFound'
-import Test from '../pages/Test'
-import TestList from '../pages/TestList'
 import Register from '../pages/Register'
+import { getPsy } from '../Api/users'
+import { Acceuil } from '../pages/DashboardMain/Acceuil'
+import { ListTest } from '../pages/DashboardMain/ListTest'
 
 const router = createBrowserRouter([
   {
@@ -21,16 +22,18 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: 'dashboard',
+        path: 'dashboard/:id',
         element: <Dashboard />,
+        loader: getPsy,
+        HydrateFallback: () => null,
         children: [
           {
-            path: 'testlist',
-            element: <TestList />,
+            path: 'acceuil',
+            element: <Acceuil />,
           },
           {
-            path: 'test', // relatif à /dashboard
-            element: <Test />,
+            path: 'testlist',
+            element: <ListTest />,
           },
         ],
       },

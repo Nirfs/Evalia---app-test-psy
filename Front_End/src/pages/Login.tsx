@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { login } from '../Api/authFetch'
 
 export default function Login() {
   const [userId, setUserId] = useState('')
@@ -8,7 +9,7 @@ export default function Login() {
 
   const navigate = useNavigate()
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!userId || !userPassword) {
@@ -19,9 +20,21 @@ export default function Login() {
       setError('Adresse mail ou mot de passe invalide')
       return
     }
+    try {
+      setError('')
+      const user = await login(userId, userPassword)
+      if (user.token) {
+        localStorage.setItem('authToken', user.token)
+        navigate(`/dashboard/${user.user.id}`)
+      }
+    } catch (e) {
+      console.error('Erreur dans la fonction handleSubmit:', e)
 
-    setError('')
-    navigate('/dashboard')
+      if (e instanceof Error) {
+        throw new Error(e.message)
+      }
+      throw new Error('Erreur réseau')
+    }
   }
 
   return (
