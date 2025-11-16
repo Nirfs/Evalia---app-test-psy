@@ -106,7 +106,7 @@ exports.loginPsychologist = async (req, res) => {
       },
     });
   } catch (e) {
-    console.error("Erreur lors de la connexion:", error);
-    return res.status(500).json({ error: "Erreur interne du serveur." });
+    console.error("Erreur lors de la connexion:", e);
+    return res.status(500).json({ e: "Erreur interne du serveur." });
   }
 };
