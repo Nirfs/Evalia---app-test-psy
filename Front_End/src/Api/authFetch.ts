@@ -27,3 +27,29 @@ export async function signUp(name: string, email: string, password: string) {
     throw new Error('Erreur réseau')
   }
 }
+
+export async function login(email: string, password: string) {
+  try {
+    const res = await fetch(`${apiUrl}/api/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    })
+
+    if (!res.ok) {
+      throw new Error('Connexion impossible')
+    }
+
+    const user = await res.json()
+    return user
+  } catch (e) {
+    console.error('Erreur dans la fonction login:', e)
+
+    if (e instanceof Error) {
+      throw new Error(e.message)
+    }
+    throw new Error('Erreur réseau')
+  }
+}
