@@ -25,7 +25,7 @@ export default function Login() {
       const user = await login(userId, userPassword)
       if (user.token) {
         localStorage.setItem('authToken', user.token)
-        navigate(`/dashboard/${user.user.id}`)
+        navigate(`/dashboard/${user.user.id}/acceuil`)
       }
     } catch (e) {
       console.error('Erreur dans la fonction handleSubmit:', e)
