@@ -1,7 +1,6 @@
 import type { Psychologist } from '../../type/type.js'
 import { useOutletContext } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { Card } from '../Card.js'
 
 export function Acceuil() {
   const thérapeute = useOutletContext<Psychologist>()

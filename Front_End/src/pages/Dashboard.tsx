@@ -1,6 +1,6 @@
 import { useLoaderData } from 'react-router-dom'
 import { Outlet } from 'react-router-dom'
-import DashboardMenu from './DashboardMenu'
+import DashboardMenu from '../components/DashboardMenu'
 import NotFound from './NotFound'
 import type { Psychologist } from '../type/type'
 
@@ -9,13 +9,12 @@ export default function Dashboard() {
 
   if (!thérapeute || !thérapeute.id) return <NotFound />
 
-  if (!thérapeute) return <NotFound />
   return (
-    <>
-      <div className="flex h-screen">
-        <DashboardMenu />
-        <Outlet />
+    <div className="flex h-full">
+      <DashboardMenu />
+      <div className="flex-1 min-h-0 overflow-auto">
+        <Outlet context={thérapeute} />
       </div>
-    </>
+    </div>
   )
 }
