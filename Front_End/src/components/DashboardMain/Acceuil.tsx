@@ -8,7 +8,7 @@ export function Acceuil() {
     <>
       <div className="font-[Inter] p-5">
         <h2 className="text-3xl font-bold">Bienvenue {thérapeute.name}</h2>
-        <Link to={'patients'}>Aller a la liste des patient &gt;</Link>
+        <Link to={'../patients'}>Aller a la liste des patient &gt;</Link>
       </div>
     </>
   )
