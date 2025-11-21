@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "firstName": "Alice",
+    "lastName": "Dupont",
+    "email": "alice.dupont@example.com",
+    "dateOfBirth": "1990-05-12",
+    "phone": "+33123456789",
+    "registeredAt": "2025-01-15",
+    "testsAssigned": ["Mini", "Inventaire de Dépression de Beck"]
+  },
+  {
+    "id": 2,
+    "firstName": "Benjamin",
+    "lastName": "Martin",
+    "email": "benjamin.martin@example.com",
+    "dateOfBirth": "1985-09-20",
+    "phone": "+33198765432",
+    "registeredAt": "2025-03-22",
+    "testsAssigned": ["Test de QI"]
+  },
+  {
+    "id": 3,
+    "firstName": "Clara",
+    "lastName": "Legrand",
+    "email": "clara.legrand@example.com",
+    "dateOfBirth": "1992-11-03",
+    "phone": "+33612345678",
+    "registeredAt": "2025-04-10",
+    "testsAssigned": []
+  },
+  {
+    "id": 4,
+    "firstName": "David",
+    "lastName": "Moreau",
+    "email": "david.moreau@example.com",
+    "dateOfBirth": "1978-02-28",
+    "phone": "+33798765432",
+    "registeredAt": "2025-05-01",
+    "testsAssigned": ["Mini"]
+  }
+]
