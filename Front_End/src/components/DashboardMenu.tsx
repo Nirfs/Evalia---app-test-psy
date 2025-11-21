@@ -1,14 +1,16 @@
 import { NavLinkTemplate } from './NavLinkTemplate'
-import { IoHomeOutline } from 'react-icons/io5'
-import { IoHome } from 'react-icons/io5'
-import { IoCreateOutline } from 'react-icons/io5'
-import { IoCreate } from 'react-icons/io5'
-import { IoPersonOutline } from 'react-icons/io5'
-import { IoPerson } from 'react-icons/io5'
-import { IoFolderOpen } from 'react-icons/io5'
-import { IoFolderOpenOutline } from 'react-icons/io5'
-import { IoSettingsOutline } from 'react-icons/io5'
-import { IoSettings } from 'react-icons/io5'
+import {
+  IoHomeOutline,
+  IoHome,
+  IoCreateOutline,
+  IoCreate,
+  IoPersonOutline,
+  IoPerson,
+  IoFolderOpen,
+  IoFolderOpenOutline,
+  IoSettingsOutline,
+  IoSettings,
+} from 'react-icons/io5'
 import { NavLink } from 'react-router-dom'
 
 export default function DashboardMenu() {

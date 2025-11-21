@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { signUp } from '../Api/authFetch.ts'
+import { InputText } from '../components/InputText.tsx'
+import { Button } from '../components/Button.tsx'
 
 export default function Register() {
   const [name, setName] = useState('')
@@ -64,13 +66,10 @@ export default function Register() {
       <div className="w-1/2 flex justify-center items-center">
         <form className="w-[420px] p-8" onSubmit={handleSubmit} noValidate>
           <div className="flex flex-col mt-4">
-            <label htmlFor="name" className="text-md mb-1 font-bold">
-              Name
-            </label>
-            <input
+            <InputText
+              label="Name"
               id="name"
               required
-              className="border-2 p-3 rounded-md text-sm outline-blue-950"
               placeholder="votre nom"
               type="text"
               value={name}
@@ -78,13 +77,10 @@ export default function Register() {
             />
           </div>
           <div className="flex flex-col mt-4">
-            <label htmlFor="email" className="text-md mb-1 font-bold">
-              Email
-            </label>
-            <input
+            <InputText
+              label="Email"
               id="email"
               required
-              className="border-2 p-3 rounded-md text-sm outline-blue-950"
               placeholder="mail"
               type="email"
               value={email}
@@ -93,13 +89,10 @@ export default function Register() {
           </div>
 
           <div className="flex flex-col mt-4">
-            <label htmlFor="password" className="text-md mb-1 font-bold">
-              Mot de passe
-            </label>
-            <input
+            <InputText
+              label="Mot de passe"
               id="password"
               required
-              className="border-2 p-3 rounded-md text-sm outline-blue-950"
               placeholder="mot de passe"
               type="password"
               value={password}
@@ -110,13 +103,11 @@ export default function Register() {
           {error && <p className="text-red-700 mt-2 text-center">{error}</p>}
           {success && <p className="text-green-700 mt-2 text-center">{success}</p>}
 
-          <button
+          <Button
             type="submit"
-            disabled={loading}
-            className={`w-full bg-blue-950 text-white text-sm rounded-sm p-3 mt-7 hover:bg-blue-900 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed`}
-          >
-            {loading ? 'Création en cours...' : 'Créer un compte'}
-          </button>
+            text={loading ? 'Création en cours...' : 'Créer un compte'}
+            loading={loading}
+          />
         </form>
       </div>
     </section>
