@@ -7,29 +7,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id           Int           @id @default(autoincrement())
+  name         String
+  email        String        @unique
+  password     String
+  role         Role
+  psychologist Psychologist?
+  patient      Patient?
+  createdAt    DateTime      @default(now())
+}
+
 model Psychologist {
-  id        Int       @id @default(autoincrement())
-  name      String
-  email     String    @unique
-  password  String
-  patients  Patient[]
-  createdAt DateTime  @default(now())
+  id       Int       @id @default(autoincrement())
+  user     User      @relation(fields: [userId], references: [id])
+  userId   Int       @unique
+  patients Patient[]
 }
 
 model Patient {
-  id           Int       @id @default(autoincrement())
-  name         String
-  email        String    @unique
-  password     String
-  psychologist Psychologist @relation(fields: [psychologistId], references: [id])
+  id             Int          @id @default(autoincrement())
+  user           User         @relation(fields: [userId], references: [id])
+  userId         Int          @unique
+  psychologist   Psychologist @relation(fields: [psychologistId], references: [id])
   psychologistId Int
-  tests        Test[]
-  createdAt    DateTime  @default(now())
+  tests          Test[]
+}
+
+enum Role {
+  PSYCHOLOGIST
+  PATIENT
+  ADMIN
 }
 
 model Test {
-  id        Int     @id @default(autoincrement())
-  patient   Patient @relation(fields: [patientId], references: [id])
+  id        Int      @id @default(autoincrement())
+  patient   Patient  @relation(fields: [patientId], references: [id])
   patientId Int
   title     String
   result    String
