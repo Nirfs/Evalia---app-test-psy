@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { getPsy } from '../Api/users'
+import { getPsy } from '../Api/usersFetch'
 
 const MOCK_PSYCHOLOGISTS = [
   { id: 1, name: 'Camille', email: 'camille@mail.fr' },

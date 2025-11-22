@@ -1,8 +1,12 @@
 export type Psychologist = {
   id: number
-  name: string
-  email: string
-  createdAt: Date
+  user: {
+    id: number
+    name: string
+    email: string
+    createdAt: string | Date
+  }
+  patients?: { id: number }[]
 }
 
 export type InputTextProps = {

@@ -11,7 +11,6 @@ import {
   IoSettingsOutline,
   IoSettings,
 } from 'react-icons/io5'
-import { NavLink } from 'react-router-dom'
 
 export default function DashboardMenu() {
   return (
@@ -52,25 +51,6 @@ export default function DashboardMenu() {
             />
           </li>
         </ul>
-
-        <div className="py-4 flex flex-col items-center">
-          <NavLink
-            to={'/register'}
-            className={
-              'w-full flex items-center py-2 px-7 font-medium rounded-lg transition duration-150 hover:text-[#F8F9FA]'
-            }
-          >
-            Créer un compte{' '}
-          </NavLink>
-          <NavLink
-            to={'/'}
-            className={
-              'w-full flex items-center py-2 px-7 font-medium rounded-lg transition duration-150 hover:text-[#F8F9FA]'
-            }
-          >
-            Se connecter
-          </NavLink>
-        </div>
       </nav>
     </aside>
   )

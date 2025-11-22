@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import Login from '../pages/Login'
+import Login from '../pages/LoginPage'
 import { MemoryRouter } from 'react-router-dom'
 import userEvent from '@testing-library/user-event'
 

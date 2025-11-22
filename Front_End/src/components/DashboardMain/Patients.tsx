@@ -1,59 +1,36 @@
-import { useEffect, useState } from 'react'
-import { TestSelector } from '../TestSelector'
 import { InputText } from '../InputText'
 import { Button } from '../Button'
-import { getPatient } from '../../Api/patientfetch'
 import type { PatientType } from '../../type/type'
-import { FaRegTrashCan } from 'react-icons/fa6'
-import { FaTrashAlt } from 'react-icons/fa'
+import { createPatient } from '../../Api/authFetch'
+import { useState } from 'react'
 
 export function Patients() {
-  const testList = ['Mini', 'Inventaire de Dépression de Beck', 'Test de QI', 'Test de machin truc']
-  const [selectedTests, setSelectedTests] = useState<string[]>([])
-
   const [patientEmail, setPatientEmail] = useState('')
   const [patientFirstName, setPatientFirstName] = useState('')
   const [patientLastName, setPatientLastName] = useState('')
 
   const [patients, setPatients] = useState<PatientType[]>([])
-  const [hoveredId, setHoveredId] = useState<number | null>(null)
 
-  useEffect(() => {
-    const fetchPatient = async () => {
-      const data = await getPatient()
-      setPatients(data)
-    }
-    fetchPatient()
-  }, [])
-
-  const handleCheckbox = (test: string) => {
-    setSelectedTests((prev) =>
-      prev.includes(test) ? prev.filter((t) => t !== test) : [...prev, test]
-    )
-  }
-  const handleDelete = (id: number) => {
-    setPatients((prev) => prev.filter((patient) => patient.id !== id))
-  }
-
-  const handleAdd = (e: React.FormEvent) => {
+  const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    const newPatient = {
-      id: patients.length + 1,
-      firstName: patientFirstName,
-      lastName: patientLastName,
-      email: patientEmail,
-      dateOfBirth: '01.01.01',
-      phone: '+9669654115',
-      registeredAt: new Date().toISOString(),
-      testsAssigned: selectedTests,
+    if (!patientFirstName || !patientLastName || !patientEmail) {
+      alert('Tous les champs sont obligatoires')
+      return
     }
 
-    setPatients((prev) => [...prev, newPatient])
-    setPatientEmail('')
-    setPatientFirstName('')
-    setPatientLastName('')
-    console.log(newPatient)
+    try {
+      const newPatient = await createPatient(`${patientFirstName} ${patientLastName}`, patientEmail)
+
+      setPatients((prev) => [...prev, newPatient.user])
+
+      setPatientEmail('')
+      setPatientFirstName('')
+      setPatientLastName('')
+    } catch (err) {
+      console.error('Erreur création patient:', err)
+      alert(err instanceof Error ? err.message : 'Erreur réseau')
+    }
   }
 
   return (
@@ -88,38 +65,8 @@ export function Patients() {
                 onChange={(e) => setPatientLastName(e.target.value)}
               />
             </div>
-
-            <TestSelector
-              testList={testList}
-              selectedTests={selectedTests}
-              onSelect={handleCheckbox}
-            />
             <Button type="submit" text="Créer le patient" onClick={handleAdd} />
           </form>
-        </div>
-        <div className="shadow-xl/30 w-xl flex flex-col mx-auto p-10 gap-3">
-          <h3 className="font-bold font-[Inter]">Liste des Patient</h3>
-          <ul className="flex flex-col gap-5">
-            {patients.map((patient) => (
-              <li className="flex gap-4" key={patient.id}>
-                <button
-                  className="cursor-pointer"
-                  onMouseEnter={() => setHoveredId(patient.id)}
-                  onMouseLeave={() => setHoveredId(null)}
-                  onClick={() => handleDelete(patient.id)}
-                >
-                  {hoveredId === patient.id ? <FaTrashAlt /> : <FaRegTrashCan />}
-                </button>
-                <div>
-                  {patient.firstName} {patient.lastName} - {patient.registeredAt}
-                  <h4 className="font-bold ">Test passé ou à passé</h4>
-                  {patient.testsAssigned.map((test) => (
-                    <p key={test}>- {test}</p>
-                  ))}
-                </div>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </div>
