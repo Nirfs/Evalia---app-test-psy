@@ -36,3 +36,10 @@ export type PatientType = {
   registeredAt: string
   testsAssigned: string[]
 }
+
+export type AuthContextType = {
+  isLoggedIn: boolean
+  token: string | null
+  login: (token: string) => void
+  logout: () => void
+}

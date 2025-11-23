@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { login } from '../Api/authFetch'
-import { InputText } from '../components/InputText'
-import { Button } from '../components/Button'
-import { Header } from '../components/Header'
-import { Footer } from '../components/Footer'
+import { InputText } from '../components/Input/InputText.tsx'
+import { Button } from '../components/Input/Button.tsx'
+import { handleChange } from '../components/HandleChange.ts'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -34,7 +33,7 @@ export default function LoginPage() {
     try {
       const user = await login(email.trim(), password.trim())
       if (user.id) {
-        navigate(`/dashboard/${user.id}/acceuil`)
+        navigate(`/dashboard/acceuil`)
       } else {
         setError('Impossible de récupérer l’ID utilisateur')
       }
@@ -49,8 +48,6 @@ export default function LoginPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
-
       <main className="grow flex justify-center items-center bg-gray-50">
         <div className="flex flex-col md:flex-row w-full max-w-5xl bg-white shadow rounded overflow-hidden">
           {/* Image à gauche */}
@@ -77,7 +74,7 @@ export default function LoginPage() {
                 type="email"
                 placeholder="votre email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleChange(setEmail)}
                 required
               />
             </div>
@@ -89,7 +86,7 @@ export default function LoginPage() {
                 type="password"
                 placeholder="votre mot de passe"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handleChange(setPassword)}
                 required
               />
             </div>
@@ -111,8 +108,6 @@ export default function LoginPage() {
           </form>
         </div>
       </main>
-
-      <Footer />
     </div>
   )
 }

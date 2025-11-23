@@ -11,7 +11,6 @@ export function Button({ type, text, loading, onClick }: ButtonProps) {
         bg-[#1a1a1a]
         text-[#F8F9FA]
         text-sm 
-        
         rounded-lg 
         py-3 
         mt-7 

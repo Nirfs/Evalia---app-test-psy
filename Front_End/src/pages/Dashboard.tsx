@@ -10,11 +10,11 @@ export default function Dashboard() {
   if (!thérapeute || !thérapeute.id) return <NotFound />
 
   return (
-    <div className="flex h-full">
+    <main className="flex h-full">
       <DashboardMenu />
       <div className="flex-1 min-h-0 overflow-auto">
         <Outlet context={thérapeute} />
       </div>
-    </div>
+    </main>
   )
 }

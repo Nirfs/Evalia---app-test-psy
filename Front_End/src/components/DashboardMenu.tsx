@@ -1,4 +1,5 @@
-import { NavLinkTemplate } from './NavLinkTemplate'
+import { useNavigate } from 'react-router-dom'
+import { NavLinkTemplate } from './Link/NavLinkTemplate'
 import {
   IoHomeOutline,
   IoHome,
@@ -10,16 +11,25 @@ import {
   IoFolderOpenOutline,
   IoSettingsOutline,
   IoSettings,
+  IoArrowUndoCircleOutline,
+  IoArrowUndoCircle,
 } from 'react-icons/io5'
 
 export default function DashboardMenu() {
+  const navigate = useNavigate()
+
+  const handDisconnected = () => {
+    localStorage.removeItem('authToken')
+    navigate('/signin')
+  }
+
   return (
-    <aside className="w-50 bg-[#101010] hover:text-blue flex flex-col shadow-xl patients py-5">
-      <h1 className="text-xl font-[Inter] pb-5 text-[#F8F9FA] px-3 border-b-2 border-gray-600 mx-2">
-        🧠 Evalia Pro
+    <aside className="w-50 bg-[#101010] hover:text-blue flex flex-col shadow-xl patients py-5 h-screen">
+      <h1 className="text-xl font-[Poppins] pb-5 text-[#F8F9FA] px-3 border-b-2 border-gray-600 mx-2">
+        Evalia
       </h1>
       <nav className="flex flex-col justify-between h-full mt-4">
-        <ul className="flex flex-col gap-1">
+        <ul className="flex flex-col gap-1 font-[Inter]">
           <li>
             <NavLinkTemplate to="acceuil" text="Accueil" icon={IoHomeOutline} iconActive={IoHome} />
           </li>
@@ -51,6 +61,15 @@ export default function DashboardMenu() {
             />
           </li>
         </ul>
+        <button onClick={handDisconnected}>
+          {' '}
+          <NavLinkTemplate
+            to="reglage"
+            text="Réglages"
+            icon={IoArrowUndoCircleOutline}
+            iconActive={IoArrowUndoCircle}
+          />
+        </button>
       </nav>
     </aside>
   )
