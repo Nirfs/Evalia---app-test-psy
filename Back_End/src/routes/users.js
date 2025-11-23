@@ -15,5 +15,6 @@ router.get(
 // Route de connexion
 router.get("/psychologist", authUsers.getAllPsy);
 router.get("/me", authMiddleware, authUsers.getMe);
+router.get("/patients", authMiddleware, authUsers.getPatients);
 
 module.exports = router;

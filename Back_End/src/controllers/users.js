@@ -79,3 +79,37 @@ exports.getMe = async (req, res) => {
     res.status(500).json({ error: "Erreur serveur" });
   }
 };
+
+exports.getPatients = async (req, res) => {
+  const psyUserId = req.user.id;
+  try {
+    const patients = await prisma.patient.findMany({
+      where: {
+        psychologist: {
+          userId: psyUserId,
+        },
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+      },
+    });
+
+    const payload = patients.map((p) => ({
+      id: p.user.id,
+      name: p.user.name,
+      email: p.user.email,
+      patientId: p.id,
+    }));
+
+    return res.status(200).json({ ok: true, patients: payload });
+  } catch (err) {
+    console.error("getPatients error", err);
+    return res.status(500).json({ ok: false, error: "Server error" });
+  }
+};
