@@ -26,3 +26,14 @@ export async function getPsy() {
     throw new Error('Erreur réseau')
   }
 }
+
+export async function getPatients() {
+  const res = await fetch(`${apiUrl}/users/patients`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+    },
+  })
+  if (!res.ok) throw new Error(`Fetch patients failed: ${res.status}`)
+  return res.json()
+}
